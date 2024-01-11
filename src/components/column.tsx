@@ -1,6 +1,15 @@
 import Task from "./task";
 
-export default function Column() {
+type ColumnPropsType = {
+  todoTasks?: any;
+  inprogTasks?: any;
+  doneTasks?: any;
+  handleSetTodo?: any;
+  handleSetInprog?: any;
+  handleSetDone?: any;
+};
+
+export default function Column(props: ColumnPropsType) {
   return (
     <div>
       <Task />
