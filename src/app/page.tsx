@@ -1,6 +1,8 @@
 "use client";
 import Column from "@/components/column";
 import { FormEvent, useState } from "react";
+import { ColumnNameOptions } from "@/utils/column";
+import { TaskMoveDirection } from "@/utils/task";
 
 export default function Home() {
   const [formInput, setFormInput] = useState("");
@@ -16,13 +18,27 @@ export default function Home() {
     setFormInput("");
   };
 
-  const handleSetTodo = () => {};
-  const handleSetInprog = () => {};
-  const handleSetDone = () => {};
+  const handleMoveTask = (
+    currentColumn: ColumnNameOptions,
+    moveDirection: TaskMoveDirection,
+    taskIndex: number
+  ): void => {};
 
-  const todoProps = { todoTasks, handleSetTodo, handleSetInprog };
-  const inprogProps = { inprogTasks, handleSetInprog, handleSetDone };
-  const doneProps = { doneTasks };
+  const todoProps = {
+    todoTasks,
+    handleMoveTask,
+    columnName: ColumnNameOptions.TODO,
+  };
+  const inprogProps = {
+    inprogTasks,
+    handleMoveTask,
+    columnName: ColumnNameOptions.IN_PROG,
+  };
+  const doneProps = {
+    doneTasks,
+    handleMoveTask,
+    columnName: ColumnNameOptions.DONE,
+  };
 
   return (
     <main className="min-h-screen p-12">
@@ -40,8 +56,11 @@ export default function Home() {
       </form>
 
       <section className="flex flex-row justify-evenly">
+        {/* Todo Column */}
         <Column {...todoProps} />
+        {/* In Prog Column */}
         <Column {...inprogProps} />
+        {/* Done Column */}
         <Column {...doneProps} />
       </section>
     </main>

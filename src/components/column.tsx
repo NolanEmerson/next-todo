@@ -1,15 +1,10 @@
 import Task from "./task";
 
-type ColumnPropsType = {
-  todoTasks?: any;
-  inprogTasks?: any;
-  doneTasks?: any;
-  handleSetTodo?: any;
-  handleSetInprog?: any;
-  handleSetDone?: any;
-};
+import { ColumnPropsType } from "@/utils/column";
 
 export default function Column(props: ColumnPropsType) {
+  console.log(props);
+
   return (
     <div>
       <Task />
