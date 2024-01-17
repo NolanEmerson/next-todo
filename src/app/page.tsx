@@ -25,10 +25,14 @@ export default function Home() {
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (formInput === "") {
+      return;
+    }
     const todoTasksCopy = [...todoTasks];
     todoTasksCopy.push(formInput);
     setTodoTasks(todoTasksCopy);
     setFormInput("");
+    setCreateTaskModalVisibility(!createTaskModalVisibility);
   };
 
   const handleMoveTask = (
@@ -73,17 +77,22 @@ export default function Home() {
       }}
     >
       <div
-        className="absolute bg-white inset-1/2 -translate-y-2/4 -translate-x-2/4 h-1/2 w-1/2 rounded-xl p-10 cursor-auto"
+        className="sticky bg-white top-1/2 left-1/2 -translate-y-2/4 -translate-x-2/4 h-64 w-96 rounded-xl p-10 cursor-auto"
         onClick={(e) => e.stopPropagation()}
       >
-        <form className="text-center mb-4" onSubmit={(e) => handleSubmit(e)}>
-          <label className="block text-xl">Create new task</label>
+        <form
+          className="text-center flex flex-col justify-center"
+          onSubmit={(e) => handleSubmit(e)}
+        >
+          <h3 className="block text-xl pb-4">Create new task</h3>
+          <label className="text-sm">Task Name</label>
           <input
+            className="block"
             type="text"
             value={formInput}
             onChange={(e) => setFormInput(e.target.value)}
           />
-          <button>Submit</button>
+          <button className="mt-4">Submit</button>
         </form>
       </div>
     </div>
