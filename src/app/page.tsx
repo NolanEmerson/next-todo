@@ -4,6 +4,7 @@ import { FormEvent, useState } from "react";
 import { ColumnNameOptions } from "@/utils/column";
 import { TaskMoveDirection } from "@/utils/task";
 import "../../modal.css";
+import Task from "@/components/task";
 
 export default function Home() {
   const [createTaskModalVisibility, setCreateTaskModalVisibility] =
@@ -39,7 +40,35 @@ export default function Home() {
     currentColumn: ColumnNameOptions,
     moveDirection: TaskMoveDirection,
     taskIndex: number
-  ): void => {};
+  ): void => {
+    let movedTask = "";
+    switch (currentColumn) {
+      case ColumnNameOptions.TODO:
+        const newTodoTasks = [...todoTasks];
+        movedTask = newTodoTasks[taskIndex];
+        newTodoTasks.splice(taskIndex, 1);
+        setTodoTasks(newTodoTasks);
+        setInprogTasks([...inprogTasks, movedTask]);
+        return;
+      case ColumnNameOptions.IN_PROG:
+        const newInprogTasks = [...inprogTasks];
+        movedTask = newInprogTasks[taskIndex];
+        newInprogTasks.splice(taskIndex, 1);
+        setInprogTasks(newInprogTasks);
+        moveDirection === TaskMoveDirection.FORWARD
+          ? setDoneTasks([...doneTasks, movedTask])
+          : setTodoTasks([...todoTasks, movedTask]);
+        return;
+      case ColumnNameOptions.DONE:
+      default:
+        const newDoneTasks = [...doneTasks];
+        movedTask = newDoneTasks[taskIndex];
+        newDoneTasks.splice(taskIndex, 1);
+        setDoneTasks(newDoneTasks);
+        setInprogTasks([...inprogTasks, movedTask]);
+        return;
+    }
+  };
 
   const todoProps = {
     todoTasks,

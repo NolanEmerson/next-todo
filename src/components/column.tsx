@@ -28,7 +28,8 @@ export default function Column(props: ColumnPropsType): JSX.Element {
   }
 
   const taskList = columnTasks.map((taskName: string, key: number) => {
-    const taskProps = { taskName, handleMoveTask };
+    const index = key;
+    const taskProps = { taskName, handleMoveTask, columnName, index };
     return <Task key={key} {...taskProps} />;
   });
 

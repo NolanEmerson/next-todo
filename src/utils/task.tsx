@@ -12,6 +12,8 @@ type TaskPropsType = {
     moveDirection: TaskMoveDirection,
     taskIndex: number
   ) => void;
+  columnName: ColumnNameOptions;
+  index: number;
 };
 
 export type { TaskPropsType };
