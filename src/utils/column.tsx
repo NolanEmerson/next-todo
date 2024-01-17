@@ -1,9 +1,9 @@
 import { TaskMoveDirection } from "./task";
 
 export enum ColumnNameOptions {
-  TODO = "todo",
-  IN_PROG = "in prog",
-  DONE = "done",
+  TODO = "To Do",
+  IN_PROG = "In Progress",
+  DONE = "Done",
 }
 
 type ColumnPropsType = {
